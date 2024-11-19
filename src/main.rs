@@ -36,11 +36,23 @@ fn main() -> Result<(), io::Errno> {
         .collect::<io::Result<Vec<Connector>>>()?;
 
     for connector in &connectors {
-        println!("Found connector {}", connector.connector_id);
+        println!(
+            "Found connector connecter_id: {} connector_type:{} connector_type_id:{}",
+            connector.connector_id, connector.connector_type, connector.connector_type_id
+        );
+
+        for (i, (prop, prop_value)) in connector
+            .props
+            .iter()
+            .zip(connector.prop_values.iter())
+            .enumerate()
+        {
+            println!("  Prop: ({}:{})", prop, prop_value)
+        }
 
         for mode in &connector.modes {
             println!(
-                "Found mode {}@{} for connector {}",
+                "  Found mode {}@{} for connector {}",
                 mode.name().to_string_lossy(),
                 mode.vertical_refresh_rate(),
                 connector.connector_id
