@@ -4,3 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+diretto = { git = "https://github.com/verdiwm/diretto.git", version = "0.0.3" }
+
+rustix = { version = "0.38.41", features = ["fs"] }
+tracing = "0.1.40"
